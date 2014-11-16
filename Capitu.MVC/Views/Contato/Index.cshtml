@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Capitu.MVC.Models.ContatoVO>
+
+@{
+    ViewBag.Title = "Contatos";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+
+<h2>Index</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+        </tr>
+    }
+
+</table>

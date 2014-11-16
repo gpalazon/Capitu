@@ -7,11 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Capitu.Web
-{
-
-
-    public partial class _Default
-    {
+namespace Capitu.Web {
+    
+    
+    public partial class _Default {
     }
 }

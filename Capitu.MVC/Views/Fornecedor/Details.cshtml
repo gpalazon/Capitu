@@ -1,0 +1,93 @@
+﻿@model Capitu.MVC.Models.FornecedorVO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Fornecedor</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+   
+    @*<div class="display-label">
+         @Html.DisplayNameFor(model => model.AvatarId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AvatarId)
+    </div>*@
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Latitude)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Latitude)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Longitude)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Longitude)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Altura)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Altura)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Peso)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Peso)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DtNascimento)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DtNascimento)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Etnia)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Etnia)
+    </div>
+   
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Olhos)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Olhos)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Preco)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Preco)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descricao)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descricao)
+    </div>
+    
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

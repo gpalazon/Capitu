@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CapituDBModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="CapituDBModelStoreContainer">
+          <EntitySet Name="Avatar" EntityType="CapituDBModel.Store.Avatar" store:Type="Tables" />
+          <EntitySet Name="Cidade" EntityType="CapituDBModel.Store.Cidade" store:Type="Tables" />
+          <EntitySet Name="Contato" EntityType="CapituDBModel.Store.Contato" store:Type="Tables" />
+          <EntitySet Name="Endereco" EntityType="CapituDBModel.Store.Endereco" store:Type="Tables" />
+          <EntitySet Name="Fornecedor" EntityType="CapituDBModel.Store.Fornecedor" store:Type="Tables" />
+          <EntitySet Name="FotosPerfil" EntityType="CapituDBModel.Store.FotosPerfil" store:Type="Tables" />
+          <EntitySet Name="Imagem" EntityType="CapituDBModel.Store.Imagem" store:Type="Tables" />
+          <EntitySet Name="Pais" EntityType="CapituDBModel.Store.Pais" store:Type="Tables" />
+          <EntitySet Name="UF" EntityType="CapituDBModel.Store.UF" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="CapituDBModel.Store.Usuario" store:Type="Tables" />
+        </EntityContainer>
+        <EntityType Name="Avatar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UrlImagem" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="100" />
+          <Property Name="UFId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contato">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="Data" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Endereco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Rua" Type="nvarchar" MaxLength="100" />
+          <Property Name="Cep" Type="nvarchar" MaxLength="100" />
+          <Property Name="CidadeId" Type="int" />
+          <Property Name="Latitude" Type="nvarchar" MaxLength="100" />
+          <Property Name="Longitude" Type="nvarchar" MaxLength="100" />
+          <Property Name="Numero" Type="int" />
+          <Property Name="Complemento" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Fornecedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="100" />
+          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="AvatarId" Type="int" Nullable="false" />
+          <Property Name="Latitude" Type="numeric" Precision="12" />
+          <Property Name="Longitude" Type="numeric" Precision="12" />
+          <Property Name="Altura" Type="float" />
+          <Property Name="Peso" Type="int" />
+          <Property Name="DtNascimento" Type="datetime" />
+          <Property Name="Olhos" Type="nvarchar" MaxLength="20" />
+          <Property Name="Preco" Type="money" />
+          <Property Name="Descricao" Type="nvarchar" MaxLength="255" />
+          <Property Name="EnderecoId" Type="int" />
+          <Property Name="Etnia" Type="nvarchar" MaxLength="20" />
+          <Property Name="ImagemAvatarId" Type="int" />
+          <Property Name="ImagemPerfilId" Type="int" />
+        </EntityType>
+        <EntityType Name="FotosPerfil">
+          <Key>
+            <PropertyRef Name="FornecedorId" />
+            <PropertyRef Name="ImagemId" />
+          </Key>
+          <Property Name="FornecedorId" Type="int" Nullable="false" />
+          <Property Name="ImagemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Imagem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UrlImagem" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="UF">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="100" />
+          <Property Name="PaisId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="nvarchar" Nullable="false" MaxLength="60" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="60" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Facebook" Type="nvarchar" MaxLength="100" />
+          <Property Name="FlAtivo" Type="bit" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CapituDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CapituDBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Avatar" EntityType="CapituDBModel.Avatar" />
+          <EntitySet Name="Cidade" EntityType="CapituDBModel.Cidade" />
+          <EntitySet Name="Contato" EntityType="CapituDBModel.Contato" />
+          <EntitySet Name="Endereco" EntityType="CapituDBModel.Endereco" />
+          <EntitySet Name="FotosPerfil" EntityType="CapituDBModel.FotosPerfil" />
+          <EntitySet Name="Imagem" EntityType="CapituDBModel.Imagem" />
+          <EntitySet Name="Pais" EntityType="CapituDBModel.Pais" />
+          <EntitySet Name="UF" EntityType="CapituDBModel.UF" />
+          <EntitySet Name="Usuario" EntityType="CapituDBModel.Usuario" />
+          <EntitySet Name="Fornecedor" EntityType="CapituDBModel.Fornecedor" />
+        </EntityContainer>
+        <EntityType Name="Avatar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UrlImagem" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nome" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UFId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contato">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Email" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Data" Precision="3" />
+        </EntityType>
+        <EntityType Name="Endereco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Rua" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Cep" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CidadeId" />
+          <Property Type="String" Name="Latitude" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Longitude" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Numero" />
+          <Property Type="String" Name="Complemento" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FotosPerfil">
+          <Key>
+            <PropertyRef Name="FornecedorId" />
+            <PropertyRef Name="ImagemId" />
+          </Key>
+          <Property Type="Int32" Name="FornecedorId" Nullable="false" />
+          <Property Type="Int32" Name="ImagemId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Imagem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UrlImagem" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nome" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UF">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nome" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PaisId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Login" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Nome" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Facebook" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="FlAtivo" />
+        </EntityType>
+        <EntityType Name="Fornecedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nome" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UsuarioId" Nullable="false" />
+          <Property Type="Int32" Name="StatusId" Nullable="false" />
+          <Property Type="Int32" Name="AvatarId" Nullable="false" />
+          <Property Type="Decimal" Name="Latitude" Precision="12" Scale="0" />
+          <Property Type="Decimal" Name="Longitude" Precision="12" Scale="0" />
+          <Property Type="Double" Name="Altura" />
+          <Property Type="Int32" Name="Peso" />
+          <Property Type="DateTime" Name="DtNascimento" Precision="3" />
+          <Property Type="String" Name="Olhos" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Preco" Precision="19" Scale="4" />
+          <Property Type="String" Name="Descricao" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="EnderecoId" />
+          <Property Type="String" Name="Etnia" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ImagemAvatarId" />
+          <Property Type="Int32" Name="ImagemPerfilId" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CapituDBModelStoreContainer" CdmEntityContainer="CapituDBEntities">
+          <EntitySetMapping Name="Avatar">
+            <EntityTypeMapping TypeName="CapituDBModel.Avatar">
+              <MappingFragment StoreEntitySet="Avatar">
+                <ScalarProperty Name="UrlImagem" ColumnName="UrlImagem" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cidade">
+            <EntityTypeMapping TypeName="CapituDBModel.Cidade">
+              <MappingFragment StoreEntitySet="Cidade">
+                <ScalarProperty Name="UFId" ColumnName="UFId" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contato">
+            <EntityTypeMapping TypeName="CapituDBModel.Contato">
+              <MappingFragment StoreEntitySet="Contato">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Endereco">
+            <EntityTypeMapping TypeName="CapituDBModel.Endereco">
+              <MappingFragment StoreEntitySet="Endereco">
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="CidadeId" ColumnName="CidadeId" />
+                <ScalarProperty Name="Cep" ColumnName="Cep" />
+                <ScalarProperty Name="Rua" ColumnName="Rua" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FotosPerfil">
+            <EntityTypeMapping TypeName="CapituDBModel.FotosPerfil">
+              <MappingFragment StoreEntitySet="FotosPerfil">
+                <ScalarProperty Name="ImagemId" ColumnName="ImagemId" />
+                <ScalarProperty Name="FornecedorId" ColumnName="FornecedorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Imagem">
+            <EntityTypeMapping TypeName="CapituDBModel.Imagem">
+              <MappingFragment StoreEntitySet="Imagem">
+                <ScalarProperty Name="UrlImagem" ColumnName="UrlImagem" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pais">
+            <EntityTypeMapping TypeName="CapituDBModel.Pais">
+              <MappingFragment StoreEntitySet="Pais">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UF">
+            <EntityTypeMapping TypeName="CapituDBModel.UF">
+              <MappingFragment StoreEntitySet="UF">
+                <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="CapituDBModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="FlAtivo" ColumnName="FlAtivo" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fornecedor">
+            <EntityTypeMapping TypeName="CapituDBModel.Fornecedor">
+              <MappingFragment StoreEntitySet="Fornecedor">
+                <ScalarProperty Name="ImagemPerfilId" ColumnName="ImagemPerfilId" />
+                <ScalarProperty Name="ImagemAvatarId" ColumnName="ImagemAvatarId" />
+                <ScalarProperty Name="Etnia" ColumnName="Etnia" />
+                <ScalarProperty Name="EnderecoId" ColumnName="EnderecoId" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Preco" ColumnName="Preco" />
+                <ScalarProperty Name="Olhos" ColumnName="Olhos" />
+                <ScalarProperty Name="DtNascimento" ColumnName="DtNascimento" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="Altura" ColumnName="Altura" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="AvatarId" ColumnName="AvatarId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

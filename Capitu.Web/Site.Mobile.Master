@@ -1,17 +1,42 @@
-<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Mobile.master.cs" Inherits="Capitu.Web.Site_Mobile" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Mobile.master.cs" Inherits="Capitu.Web.Site_Mobile" %>
+
 <%@ Register Src="~/ViewSwitcher.ascx" TagPrefix="friendlyUrls" TagName="ViewSwitcher" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<%--<head runat="server">
     <meta name="viewport" content="width=device-width" />
     <title></title>
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+</head>--%>
+<head>
+    <title>Capitu</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Capitu">
+    <meta name="author" content="Capitu">
+    <link rel="stylesheet" type="text/css" href="Content/styleDefault.css" />
+    <link href='http://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            //$("#icoSearchHome").css("clear", "both");
+
+            $("#btnSearchHome").click(function () {
+                $("#divBtnSearchHome").hide();
+                $("#divSearchHome").show(100);
+                $("#inputSearchHome").focus();
+            });
+        });
+    </script>
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
 </head>
-<body>
+
+
+<%--<body>
     <form id="form1" runat="server">
     <div>
-        <h1>Mobile Master Page</h1>
+        <h1>Capitu</h1>
         <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
         <section class="content-wrapper main-content clear-fix">
             <asp:ContentPlaceHolder runat="server" ID="MainContent" />
@@ -19,5 +44,52 @@
         <friendlyUrls:ViewSwitcher runat="server" />
     </div>
     </form>
+</body>--%>
+<body>
+    <form id="form1" runat="server">
+        <div id="mainContainer" class="mainContainer">
+            <div class="header">
+                <div class="logo">
+                    <h1>
+                        <a href="../Mapa.aspx">
+                            <img src="images/logoCapitu.png" />
+                        </a>
+                    </h1>
+                </div>
+                <div style="float: left; width: 70%; box-sizing: border-box; padding: 0 20px 0 0; text-align: right;">
+                    <div id="divBtnSearchHome" style="width: 30px; float: right;">
+                        <img id="btnSearchHome" src="images/icos/icoSearch.png" style="cursor: pointer;" />
+                    </div>
+                    <div id="divSearchHome" style="width: 100%; box-sizing: border-box; padding: 0 0 30px 0; width: 100%; display: none;">
+                        <input type="search" id="inputSearchHome" class="inputSearchHome inputSearch" placeholder="Buscar por..." />
+                    </div>
+                </div>
+                <div style="width: 100%; float: left; box-sizing: border-box;">
+                    <div style="float: right; width: 100%; margin-top: -20px; box-sizing: border-box; padding: 0 20px;">
+                        <span style="float: left; width: 30%; color: #fff;">Buscar por:</span>
+                        <select class="selectSearchHome">
+                            <option>Loiras</option>
+                            <option>Morenas</option>
+                            <option>Ruivas</option>
+                            <option>Aziáticas</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="divPrincipal">
+                <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+                <section class="content-wrapper main-content clear-fix">
+                    <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+                </section>
+                <%--<friendlyUrls:ViewSwitcher ID="ViewSwitcher1" runat="server" />--%>
+            </div>
+            <%--<div id="mapaContainer" style="width: 100%; float: left;">
+            <iframe id="iframeMapa" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3657.084343043063!2d-46.65181700000001!3d-23.565414099999998!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.+Paulista+-+Bela+Vista%2C+S%C3%A3o+Paulo+-+SP!5e0!3m2!1spt-BR!2sbr!4v1411145160720" frameborder="0"></iframe>
+        </div>--%>
+        </div>
+        <%-- <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>--%>
+    </form>
 </body>
+
 </html>

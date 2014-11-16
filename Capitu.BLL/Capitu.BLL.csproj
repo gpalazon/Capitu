@@ -40,7 +40,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="ContatoBLL.cs" />
+    <Compile Include="FornecedorBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsuarioBLLcs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Capitu.BE\Capitu.BE.csproj">
+      <Project>{e62f78fa-a1fb-4b62-95d1-d04d4dbe0cca}</Project>
+      <Name>Capitu.BE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Capitu.DAL\Capitu.DAL.csproj">
+      <Project>{728ed022-54af-4b02-87fd-949270423be8}</Project>
+      <Name>Capitu.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

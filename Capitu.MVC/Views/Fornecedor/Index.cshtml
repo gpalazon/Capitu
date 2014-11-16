@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Capitu.MVC.Models.FornecedorVO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdUsuario)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.StatusId)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.AvatarId)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Altura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Peso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DtNascimento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Etnia)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Cabelo)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Olhos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Preco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.EnderecoId)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>        
+        @*<td>
+            @Html.DisplayFor(modelItem => item.StatusId)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.AvatarId)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Altura)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Peso)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.DtNascimento)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Etnia)
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.Olhos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Preco)
+        </td>                
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Perfil", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

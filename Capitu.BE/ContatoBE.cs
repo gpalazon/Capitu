@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Capitu.BE
 {
-    public class Class1
+    public class ContatoBE
     {
+        public string Email { get; set; }
     }
 }

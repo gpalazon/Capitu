@@ -1,0 +1,68 @@
+﻿@model Capitu.MVC.Models.FornecedorVO
+
+@{
+    ViewBag.Title = "Perfil";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+
+<link rel="Stylesheet" href="~/Content/Pages/Perfil.css" />
+
+<body>
+        <div id='root'>
+            <div class='box' id='header'></div>            
+            <div class='box' id='imagem'>            
+                @Html.Raw(Capitu.MVC.Helpers.Util.InsereImagem(Model.ImgPerfil.UrlImagem, 200))
+            </div>
+            <div class='box' id='conteudo'>
+                <div class='box' id='l1'>&nbsp;</div>
+                <div class='box' id='left'>&nbsp;</div>
+                <div class='box' id='center'>
+
+                    @*<div class='box' id='capNome'></div>
+                    <div class='box' id='nome'></div>
+                    <div class='box' id='capEtnia'></div>
+                    <div class='box' id='etnia'></div>*@
+
+                    <div class='box' id='l1c1'>@Html.DisplayNameFor(model => model.Nome)</div>
+                    
+                    <div class='box' id='l1c2'>@Html.DisplayFor(model => model.Nome)</div>
+                    
+                    <div class='box' id='l1c3'>@Html.DisplayNameFor(model => model.Etnia)</div>
+                    
+                    <div class='box' id='l1c4'>@Html.DisplayFor(model => model.Etnia)</div>
+                                        
+                    <div style="height: 10px; width: 100%;"></div>
+                                        
+                    <div class='box' id='l2c1'>@Html.DisplayNameFor(model => model.Olhos)</div>
+                    <div class='box' id='l2c2'>@Html.DisplayFor(model => model.Olhos)</div>
+                    <div class='box' id='l2c3'>@Html.DisplayNameFor(model => model.Idade)</div>
+                    <div class='box' id='l2c4'>@Html.DisplayFor(model => model.Idade)</div>                                                           
+                    
+                    
+
+                    <div class='box' id='l3c1'>@Html.DisplayNameFor(model => model.Altura)</div>
+                    <div class='box' id='l3c2'>@Html.DisplayFor(model => model.Altura)</div>
+                    <div class='box' id='l3c3'>@Html.DisplayNameFor(model => model.Peso)</div>
+                    <div class='box' id='l3c4'>@Html.DisplayFor(model => model.Peso)</div>
+                    
+                    <div class='espacol'></div>
+
+                    <div class='box' id='l4c1'>@Html.DisplayNameFor(model => model.Idade)</div>
+                    <div class='box' id='l4c2'>@Html.DisplayFor(model => model.Idade)</div>
+                    <div class='box' id='l4c3'>@Html.DisplayNameFor(model => model.Preco)</div>
+                    <div class='box' id='l4c4'>R$ @Html.DisplayFor(model => model.Preco)</div>
+
+                    <br />
+                    <div class='box' id='descricao'><label style="color: #C71585;">Descrição:</label><br/>@Html.DisplayFor(model => model.Descricao)</div>
+                </div>
+                <div class='box' id='right'>&nbsp;</div>
+                <div class='box' id='l2'>&nbsp;</div>
+            </div>
+            <div class='box' id='footer'></div>
+        </div>
+    </body>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
