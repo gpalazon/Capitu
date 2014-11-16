@@ -17,6 +17,7 @@ namespace Capitu.MVC
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Mapa", action = "Index", id = UrlParameter.Optional }
+                //defaults: new { controller = "Fornecedor", action = "View1", id = UrlParameter.Optional }
             );
         }
     }

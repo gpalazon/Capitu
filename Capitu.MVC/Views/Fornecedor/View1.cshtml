@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+@model Capitu.MVC.Models.FornecedorVO
+@{
+    ViewBag.Title = "Perfil";
+    Layout = null;
+}
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Capitu - O prazer mora ao lado!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+	<!--script src="js/less-1.3.3.min.js"></script-->
+	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+	
+	<link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+	<link href="~/Content/css/style.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~Images/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~Images/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~Images/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="~Images/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" href="~Images/favicon.png">
+  
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
+	<link href="~/Content/css/owl.carousel.css" rel="stylesheet">
+    <link href="~/Content/css/owl.theme.css" rel="stylesheet">
+    <style>
+        #owl-demo .item img
+        {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        
+        .owl-prev, .owl-next
+        {
+            display: none !important;            
+        }
+    </style>
+	<script type="text/javascript" src="~/Scripts/js/jquery.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/js/scripts.js"></script>
+	<script src="~/Scripts/js/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/js/owl.carousel.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#owl-demo").owlCarousel({
+                navigation: true,
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                singleItem: true
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="row clearfix header">
+				<div class="col-md-3 column logo">
+					<h1>
+						<img src="~/Images/logoCapitu.png" />
+					</h1>
+					<p>O <span>prazer</span> mora ao lado!</p>
+				</div>
+				<div class="col-md-9 column">
+					<div class="tituloPag">
+						Perfil
+					</div>
+					<div class="nomePerfil">
+						<span>@Html.DisplayFor(model => model.Nome)<span>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+<div>
+	<div id="owl-demo" class="owl-carousel">
+        @foreach (var item in Model.Fotos)
+        {
+            <div class="item">                
+                @*<img src="~/Images/perfil/fullimage1.jpg" alt="The Last of us">*@
+                @Html.Raw(Capitu.MVC.Helpers.Util.InsereImagem(item.UrlImagem, 0))
+            </div>
+        }
+		@*<div class="item">
+			<img src="~/Images/perfil/fullimage1.jpg" alt="The Last of us"></div>
+		<div class="item">
+			<img src="~/Images/perfil/fullimage2.jpg" alt="GTA V"></div>
+		<div class="item">
+			<img src="~/Images/perfil/fullimage3.jpg" alt="Mirror Edge"></div>*@
+	</div>
+	<div>
+		<table class="tblPerfil">
+		<tbody>
+			<tr>
+				<td>
+					<span>Nome</span>
+				</td>
+				<td>
+					<span>@Html.DisplayFor(model => model.Nome)<span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span>Atributos</span>
+				</td>
+				<td>
+					@*<span>Morena, Olhos verdes, 28 anos, 1.80 de altura, 60 kilos.<span>*@
+                    <span>@Html.Raw(Capitu.MVC.Helpers.Util.InsereAtributos(Model))</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span>Valor/h</span>
+				</td>
+				<td>
+					@*<span>$ 200,00<span>*@
+                    <span>R$ @Html.DisplayFor(model => model.Preco)</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top">
+					<span>Descrição Própria</span>
+				</td>
+				<td>
+					@*<span class="txtDescricao">Sou uma mulher naturalmente sensual... Gosto muito de me cuidar e estar em forma, sou muito vaidosa sempre estou com arquinha de buiquini e mantenho a pele sempre macia e perfumada.
+
+Sou uma acompanhante morena estilo mulherão, tenho seios fartos e uma boca sensual que conhece bem a arte do prazer.
+
+Sou uma acompanhante morena estilo mulherão, tenho seios fartos e uma boca sensual que conhece bem a arte do prazer.
+
+Sou uma acompanhante morena estilo mulherão, tenho seios fartos e uma boca sensual que conhece bem a arte do prazer.<span>*@
+                    <span>@Html.DisplayFor(model => model.Descricao)</span>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+	<div class="boxBtnChamarPraSair">
+		<input type="button" class="btnDefault" value="Convidar Ana Bella pra sair" />
+	</div>
+</div>
+</body>
+</html>

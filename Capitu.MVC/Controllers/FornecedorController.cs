@@ -27,6 +27,11 @@ namespace Capitu.MVC.Controllers
         }
 
 
+        /*public ActionResult View1() 
+        {
+            return View();
+        }*/
+
         public ActionResult Index()
         {
             _fornecedorBll = new FornecedorBLL();
@@ -57,6 +62,17 @@ namespace Capitu.MVC.Controllers
             ret.GetFromBE(_fornecedorBll.GetFornecedor(id));            
 
             return View(ret);            
+        }
+
+        public ActionResult View1(int id = 0)
+        {
+            _fornecedorBll = new FornecedorBLL();
+
+            FornecedorVO ret = new FornecedorVO();
+
+            ret.GetFromBE(_fornecedorBll.GetFornecedor(id));
+
+            return View(ret);
         }
 
         public ActionResult Perfil(int id = 0)

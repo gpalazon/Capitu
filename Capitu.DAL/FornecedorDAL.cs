@@ -24,7 +24,7 @@ namespace Capitu.DAL
                 var q = from f in db.Fornecedor
                         from ip in db.Imagem.Where(x => x.Id == f.ImagemPerfilId).DefaultIfEmpty()
                         from ia in db.Avatar.Where(x => x.Id == f.ImagemAvatarId).DefaultIfEmpty()
-                        join u in db.Usuario on f.UsuarioId equals u.Id                        
+                        join u in db.Usuario on f.UsuarioId equals u.Id
                         //join a in context.Avatar on f.AvatarId equals a.Id
                         select new FornecedorBE()
                         {
@@ -32,10 +32,11 @@ namespace Capitu.DAL
                             Etnia = f.Etnia,
                             //Idade = Idade(f.DtNascimento.Value),
                             Idade = 23,
-                            Usuario = new UsuarioBE(){
+                            Usuario = new UsuarioBE()
+                            {
                                 Id = u.Id,
                                 Nome = u.Nome,
-                                Email  = u.Email,
+                                Email = u.Email,
                                 Facebook = u.Facebook,
                                 FlAtivo = u.FlAtivo.Value,
                                 Login = u.Login
@@ -105,14 +106,19 @@ namespace Capitu.DAL
 
                 FornecedorBE fornecedor = (FornecedorBE)q.FirstOrDefault();
 
-                var qi = from f in db.FotosPerfil
-                         join i in db.Imagem on f.ImagemId equals i.Id
-                         where f.FornecedorId == fornecedor.Id
-                         select i;
-
-                foreach (var img in qi.ToList())
+                if (fornecedor != null)
                 {
-                    fornecedor.Fotos.Add(new ImagemBE(img.Id, img.UrlImagem));
+                    var qi = from f in db.FotosPerfil
+                             join i in db.Imagem on f.ImagemId equals i.Id
+                             where f.FornecedorId == fornecedor.Id
+                             select i;
+
+                    fornecedor.Fotos = new List<ImagemBE>();
+
+                    foreach (var img in (List<Imagem>)qi.ToList())
+                    {
+                        fornecedor.Fotos.Add(new ImagemBE(img.Id, img.UrlImagem));
+                    }
                 }
 
                 return fornecedor;
@@ -175,13 +181,13 @@ namespace Capitu.DAL
             }
         }
 
-        public void Delete(int idFornecedor) 
+        public void Delete(int idFornecedor)
         {
             using (CapituDBEntities db = new CapituDBEntities())
             {
                 Fornecedor f = db.Fornecedor.Find(idFornecedor);
 
-                db.Fornecedor.Remove(f);                
+                db.Fornecedor.Remove(f);
                 db.SaveChanges();
             }
         }

@@ -73,7 +73,7 @@ namespace Capitu.MVC.Controllers
             }
 
 
-            /*pinList.Add(new PinVO()
+            pinList.Add(new PinVO()
             {
                 Etnia =  "Morena",
                 GeoLat = -46.6557745,
@@ -91,7 +91,7 @@ namespace Capitu.MVC.Controllers
                 Etnia = "Morena",
                 GeoLat = -46.6552704,
                 GeoLong = -23.5681011,
-                Id = 2,
+                Id = 5,
                 Idade = 25,
                 Imagem = "Images/modelo2.png",
                 Nome = "Barbara",
@@ -104,7 +104,7 @@ namespace Capitu.MVC.Controllers
                 Etnia = "Loira",
                 GeoLat = -46.6552704,
                 GeoLong = -23.566491,
-                Id = 3,
+                Id = 6,
                 Idade = 25,
                 Imagem = "Images/modelo4.jpg",
                 Nome = "Julia",
@@ -117,13 +117,13 @@ namespace Capitu.MVC.Controllers
                 Etnia = "Loira",
                 GeoLat = -46.6509546,
                 GeoLong = -23.567757,
-                Id = 4,
+                Id = 7,
                 Idade = 27,
                 Imagem = "Images/modelo12.jpg",
                 Nome = "Jessica",
                 Olhos = "Pretos",
                 Preco = 250
-            });*/
+            });
 
             /*{ "Id": 1, "GeoLong": "", "GeoLat": "-46.6557745", "Nome": "Ana Bella", "Imagem": "Images/modelo1.jpg", "Idade": "18", "Olhos": "Verdes", "Etnia": "Morena", "Preco": "R$200" },
                 { "Id": 2, "GeoLong": "-23.5681011", "GeoLat": "-46.6552704", "Nome": "Barbara", "Imagem": "Images/modelo2.png", "Idade": "25", "Olhos": "Verdes", "Etnia": "Morena", "Preco": "R$250" },
