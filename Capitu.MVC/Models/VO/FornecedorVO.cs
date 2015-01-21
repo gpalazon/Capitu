@@ -18,21 +18,27 @@ namespace Capitu.MVC.Models
         [Display(Name = "Preço:")]
         public decimal Preco { get; set; }
 
-        public decimal Longitude { get; set; }
 
-        public decimal Latitude { get; set; }
+        [Display(Name = "Endereço:")]
+        public string Endereco { get; set; }
+
+        public string Longitude { get; set; }
+
+        public string Latitude { get; set; }
 
         [Display(Name = "Idade:")]
         public int Idade { get; set; }
 
         [Display(Name = "Altura:")]
-        public int Altura { get; set; }
+        public decimal Altura { get; set; }
 
         [Display(Name = "Olhos:")]
         public string Olhos { get; set; }
 
-        [Display(Name = "Etnia:")]
-        public string Etnia { get; set; }
+        //[Display(Name = "Etnia:")]
+        //
+        //public string Etnia { get; set; }
+        public EtniaVO Etnia { get; set; }
 
         [Display(Name = "Peso:")]
         public int Peso { get; set; }
@@ -43,47 +49,68 @@ namespace Capitu.MVC.Models
 
         public List<ImagemVO> Fotos { get; set; }
 
+        [Display(Name = "Telefone:")]
+        public string Telefone { get; set; }
+
         public string Descricao { get; set; }
 
         public DateTime DtNascimento { get; set; }
 
         public FornecedorBE ConvertToBE()
         {
-            FornecedorBE ret = new FornecedorBE()
-            {
-                Usuario = new UsuarioBE() {
-                    Email = Email,
-                    Facebook = Facebook,
-                    FlAtivo = FlAtivo,
-                    Id = IdUsuario,
-                    Login = Login                    
-                },
-                Altura = Altura,
-                Descricao = Descricao,
-                DtNascimento = DtNascimento,
-                Etnia = Etnia,
-                Fotos = new List<ImagemBE>(),
-                Id = Id,
-                Idade = Idade,
-                Latitude = Latitude,
-                Longitude = Longitude,
-                Nome = Nome,
-                Olhos = Olhos,
-                Peso = Peso,
-                Preco = Preco,
-                //Avatar = ImgAvatar.ConvertToBE(),
-                //ImgPerfil = ImgPerfil.ConvertToBE()
-                ImgAvatarId = ImgAvatar.Id,
-                ImgAvatarUrl = ImgAvatar.UrlImagem,
-                ImgPerfilId = ImgPerfil.Id,
-                ImgPerfilUrl = ImgPerfil.UrlImagem
-            };
+            FornecedorBE ret = new FornecedorBE();
+            
+            ret.Usuario = new UsuarioBE();
+                
+            ret.Usuario.Email = Email;
+            ret.Usuario.Facebook = Facebook;
+            ret.Usuario.FlAtivo = true;//FlAtivo,
+            ret.Usuario.Id = IdUsuario;
+            ret.Usuario.Login = Email;//Login                
 
-            foreach (var f in Fotos)
+            ret.Altura = Altura;
+
+            ret.Descricao = Descricao;
+            ret.DtNascimento = DtNascimento;
+            ret.Etnia = new EtniaBE() 
             {
-                ret.Fotos.Add(f.ConvertToBE());
+                Id = Etnia.Id,
+                DsEtnia = Etnia.DsEtnia
+            };
+            ret.Fotos = new List<ImagemBE>();
+            ret.Id = Id;
+            ret.Idade = Idade;
+            ret.Latitude = decimal.Parse(Latitude.Replace(".",","));
+            ret.Longitude = decimal.Parse(Longitude.Replace(".", ","));
+            ret.Nome = Nome;
+            ret.Olhos = Olhos;
+            ret.Peso = Peso;
+            ret.Preco = Preco;
+            ret.Telefone = Telefone;
+            ret.Endereco = Endereco;
+
+            //Avatar = ImgAvatar.ConvertToBE(),
+            //ImgPerfil = ImgPerfil.ConvertToBE()
+            
+            if (ImgAvatar != null) 
+            {
+                ret.ImgAvatarId = ImgAvatar.Id;
+                ret.ImgAvatarUrl = ImgAvatar.UrlImagem;                
             }
 
+            if (ImgPerfil != null)
+            {
+                ret.ImgPerfilId = ImgPerfil.Id;
+                ret.ImgPerfilUrl = ImgPerfil.UrlImagem;                
+            }
+
+            if (Fotos != null) 
+            {                
+                foreach (var f in Fotos)
+                {
+                    ret.Fotos.Add(f.ConvertToBE());
+                }
+            }
             return ret;
         }
 
@@ -92,12 +119,16 @@ namespace Capitu.MVC.Models
             Altura = fornecedor.Altura;
             Descricao = fornecedor.Descricao;
             DtNascimento = fornecedor.DtNascimento;
-            Etnia = fornecedor.Etnia;
+            Etnia = new EtniaVO()
+            {
+                Id = fornecedor.Etnia.Id,
+                DsEtnia = fornecedor.Etnia.DsEtnia
+            };
             Fotos = new List<ImagemVO>();
             Id = fornecedor.Id;
             Idade = fornecedor.Idade;
-            Latitude = fornecedor.Latitude;
-            Longitude = fornecedor.Longitude;
+            Latitude = fornecedor.Latitude.ToString().Replace(",",".");
+            Longitude = fornecedor.Longitude.ToString().Replace(",", ".");
             Nome = fornecedor.Nome;
             Olhos = fornecedor.Olhos;
             Peso = fornecedor.Peso;
@@ -129,6 +160,8 @@ namespace Capitu.MVC.Models
             FlAtivo = fornecedor.Usuario.FlAtivo;
             IdUsuario = fornecedor.Usuario.Id;
             Login = fornecedor.Usuario.Login;
+            Telefone = fornecedor.Telefone;
+            Endereco = fornecedor.Endereco;
         }
 
 

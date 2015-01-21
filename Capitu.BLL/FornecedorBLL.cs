@@ -14,8 +14,17 @@ namespace Capitu.BLL
 
         public List<FornecedorBE> GetFornecedores(int idEtnia, string nome) 
         {
-            _fornDal = new FornecedorDAL();
-            return _fornDal.GetFornecedores(idEtnia, nome);
+            try 
+            {
+                _fornDal = new FornecedorDAL();
+                return _fornDal.GetFornecedores(idEtnia, nome);
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            
         }
 
         public FornecedorBE GetFornecedor(int idFornecedor)

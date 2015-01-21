@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="ContatoBLL.cs" />
+    <Compile Include="EtniaBLL.cs" />
     <Compile Include="FornecedorBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsuarioBLLcs.cs" />

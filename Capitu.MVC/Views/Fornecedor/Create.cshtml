@@ -2,139 +2,222 @@
 
 @{
     ViewBag.Title = "Create";
+    //Layout = "~/Views/Shared/_LayoutMobile.cshtml";
 }
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Fornecedor</legend>
+            @Html.HiddenFor(model => model.Id)
+            
+            <fieldset>
+                <legend>Fornecedor</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nome)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nome)
-            @Html.ValidationMessageFor(model => model.Nome)
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Nome)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Nome)
+                    @Html.ValidationMessageFor(model => model.Nome)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Email)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+
+                @*        <div class="editor-label">
+                        @Html.LabelFor(model => model.StatusId)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.StatusId)
+                        @Html.ValidationMessageFor(model => model.StatusId)
+                    </div>
+                *@
+                @*      <div class="editor-label">
+                        @Html.LabelFor(model => model.AvatarId)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.AvatarId)
+                        @Html.ValidationMessageFor(model => model.AvatarId)
+                    </div>*@
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Telefone)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Telefone)
+                    @Html.ValidationMessageFor(model => model.Telefone)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Endereco)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Endereco, new { id = "txtEndereco", name = "txtEndereco" })
+                    @*@Html.ValidationMessageFor(model => model.Latitude)*@
+                </div>
+                <span>
+                    <input type="button" value="Buscar Endereço" id="btnEndereco" />
+                </span>
+
+                @*@Html.ActionLink("Selecionar Endereço", "Listar", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "listaEnderecos" }))*@
+
+                <div id="listaEnderecos">
+                    @*@Html.Partial("_ListaEnderecos", new Capitu.MVC.Models.EnderecoVO())*@
+                </div>
+                @*@Html.ActionLink("Selecionar Endereço", "Listar")*@
+
+                @Html.HiddenFor(model => model.Latitude)
+                @Html.HiddenFor(model => model.Longitude)
+
+                @*<div class="editor-label">
+                        @Html.LabelFor(model => model.Latitude)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Latitude)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Longitude)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Longitude)
+                    </div>*@
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Altura)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Altura)
+                    @Html.ValidationMessageFor(model => model.Altura)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Peso)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Peso)
+                    @Html.ValidationMessageFor(model => model.Peso)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.DtNascimento)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.DtNascimento)
+                    @Html.ValidationMessageFor(model => model.DtNascimento)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Etnia)
+                </div>
+                <div class="editor-field">
+                    @*@Html.EditorFor(model => model.Etnia)*@
+                    @Html.DropDownListFor(model => model.Etnia.Id, (SelectList)ViewBag.EtniaList, new { id = "Id", name = "DsEtnia" })
+                    @Html.ValidationMessageFor(model => model.Etnia)
+                </div>
+
+                @*        <div class="editor-label">
+                        @Html.LabelFor(model => model.Cabelo)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Cabelo)
+                        @Html.ValidationMessageFor(model => model.Cabelo)
+                    </div>*@
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Olhos)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Olhos)
+                    @Html.ValidationMessageFor(model => model.Olhos)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Preco)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Preco)
+                    @Html.ValidationMessageFor(model => model.Preco)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Descricao)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Descricao)
+                    @Html.ValidationMessageFor(model => model.Descricao)
+                </div>
+
+                @*<div class="editor-label">
+                        @Html.LabelFor(model => model.EnderecoId)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.EnderecoId)
+                        @Html.ValidationMessageFor(model => model.EnderecoId)
+                    </div>*@
+
+                <p>
+                    <input type="submit" value="Salvar" />
+                </p>
+            </fieldset>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
         </div>
 
-@*        <div class="editor-label">
-            @Html.LabelFor(model => model.StatusId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.StatusId)
-            @Html.ValidationMessageFor(model => model.StatusId)
-        </div>
-*@
-  @*      <div class="editor-label">
-            @Html.LabelFor(model => model.AvatarId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AvatarId)
-            @Html.ValidationMessageFor(model => model.AvatarId)
-        </div>*@
+        @section Scripts {
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Latitude)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Latitude)
-            @Html.ValidationMessageFor(model => model.Latitude)
-        </div>
+            @Scripts.Render("~/bundles/jqueryval")
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Longitude)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Longitude)
-            @Html.ValidationMessageFor(model => model.Longitude)
-        </div>
+<script type="text/javascript">
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Altura)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Altura)
-            @Html.ValidationMessageFor(model => model.Altura)
-        </div>
+    $(function () {
+        
+        $("#btnEndereco").click(function () {                        
+                        
+            //var endereco = $('#txtEndereco').val()
+            var endereco = $('#Endereco').val()            
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Peso)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Peso)
-            @Html.ValidationMessageFor(model => model.Peso)
-        </div>
+            //var end = JSON.stringify(endereco);
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DtNascimento)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DtNascimento)
-            @Html.ValidationMessageFor(model => model.DtNascimento)
-        </div>
+            //alert('teste:' + end)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Etnia)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Etnia)
-            @Html.ValidationMessageFor(model => model.Etnia)
-        </div>
+           /*$.ajax({
+                url: '/Endereco/Listar',
+                dataType: 'json',
+                type: 'GET',
+                data: { endereco: endereco },
+                success: function (view) {
+                    debugger;
+                    $('#listaEnderecos').html(view);
+                },
+                error: function (e)
+                {
+                   
+                }
+            });*/
 
-@*        <div class="editor-label">
-            @Html.LabelFor(model => model.Cabelo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Cabelo)
-            @Html.ValidationMessageFor(model => model.Cabelo)
-        </div>*@
+            //$('#listaEnderecos').load('/Endereco/Listar');
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Olhos)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Olhos)
-            @Html.ValidationMessageFor(model => model.Olhos)
-        </div>
+            //$('#listaEnderecos').load('Endereco/Listar?endereco=' + end)
+            $('#listaEnderecos').load('/Endereco/Listar', { "endereco": endereco });           
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Preco)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Preco)
-            @Html.ValidationMessageFor(model => model.Preco)
-        </div>
+            //$('#listaEnderecos').css('visibility', 'visible');
+            $('#listaEnderecos').show();
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Descricao)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Descricao)
-            @Html.ValidationMessageFor(model => model.Descricao)
-        </div>
+        });
+    });
 
-        @*<div class="editor-label">
-            @Html.LabelFor(model => model.EnderecoId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EnderecoId)
-            @Html.ValidationMessageFor(model => model.EnderecoId)
-        </div>*@
+</script>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        }

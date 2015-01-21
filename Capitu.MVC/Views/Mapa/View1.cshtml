@@ -1,0 +1,520 @@
+﻿@model Capitu.MVC.Models.FiltroVM
+@{
+    ViewBag.Title = "Capitu - O Prazer mora ao lado";
+    Layout = null;
+}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Capitu - O prazer mora ao lado!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+    <!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+    <!--script src="js/less-1.3.3.min.js"></script-->
+    <!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~Images/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~Images/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~Images/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~Images/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="~Images/favicon.png">
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
+    <link href="~/Content/css/owl.carousel.css" rel="stylesheet">
+    <link href="~/Content/css/owl.theme.css" rel="stylesheet">
+    
+    @*<link href="~/Content/css/style.css" rel="stylesheet">*@
+
+    @*<link href="~/Content/css/bootstrap.min.css" rel="stylesheet">*@
+    @*<link href="~/Content/site.css" rel="stylesheet">*@
+
+    <style>
+        #owl-demo .item img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .owl-prev, .owl-next {
+            display: none !important;
+        }
+    </style>
+    <style>
+        #map_canvas img {
+            max-width: none;
+        }
+    </style>
+
+    <!-- This css is to give a nice big popup "info window" when a marker is clicked on the map -->
+    <style>
+        .infoDiv {
+            height: 200px;
+            width: 300px;
+            -webkit-user-select: none;
+            background-color: white;
+        }
+    </style>
+
+    <script type="text/javascript" src="~/Scripts/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/scripts.js"></script>
+    <script src="~/Scripts/js/jquery-1.9.1.min.js"></script>
+        
+    <script type="text/javascript">
+
+    $(function () {
+
+        $('#pagEsquerda').click(function () {
+            mapa.atualiza();
+        });
+
+
+        $("#Etnia").change(function () {
+            //alert('change');
+            mapa.atualiza();
+        });
+
+        mapa.inicializa();
+
+    });
+
+
+
+
+    var map;
+    var markers = [];
+
+    // Sets the map on all markers in the array.
+    function setAllMap(m) {
+        //alert('setAllMap');
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(m);
+        }
+    }
+
+    // Removes the markers from the map, but keeps them in the array.
+    function clearMarkers() {
+        //alert('clearMarkers');
+        setAllMap(null);
+    }
+
+
+    var mapa = {        
+
+        inicializa: function () {
+
+            // Google has tweaked their interface somewhat - this tells the api to use that new UI
+            google.maps.visualRefresh = true;
+            
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (p) {
+
+                    var LatLng = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
+                    var mapOptions = {
+                        center: LatLng,
+                        zoom: 14,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+
+                    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+                    var marker = new google.maps.Marker({
+                        position: LatLng,
+                        map: map,
+                        draggable: true,
+                        //icon: 'Images/user2.png'
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                        //title: "<div style = 'height:60px;width:200px'><b>Your location:</b><br />Latitude: " + p.coords.latitude + "<br />Longitude: " + p.coords.longitude
+                    });
+
+                    //marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+
+                });
+            } else {
+
+                var latlng = new google.maps.LatLng(-23.561965, -46.6557745);
+
+                var mapOptions = {
+                    center: LatLng,
+                    zoom: 13,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                
+                map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+                alert('Ops... Não foi possível encontrar a sua localização!.');
+            }
+
+
+            /*
+            // a sample list of JSON encoded data of places to visit in Liverpool, UK
+            // you can either make up a JSON list server side, or call it from a controller using JSONResult
+            var data = [
+                    { "Id": 1, "GeoLong": "-23.561965", "GeoLat": "-46.6557745", "Nome": "Ana Bella", "Imagem": "Images/modelo1.jpg", "Idade": "18", "Olhos": "Verdes", "Etnia": "Morena", "Preco": "R$200" },
+                    { "Id": 2, "GeoLong": "-23.5681011", "GeoLat": "-46.6552704", "Nome": "Barbara", "Imagem": "Images/modelo2.png", "Idade": "25", "Olhos": "Verdes", "Etnia": "Morena", "Preco": "R$250" },
+                    { "Id": 3, "GeoLong": "-23.566491", "GeoLat": "-46.6482424", "Nome": "Julia", "Imagem": "Images/modelo4.jpg", "Idade": "19", "Olhos": "Verdes", "Etnia": "Loira", "Preco": "R$275" },
+                    { "Id": 4, "GeoLong": "-23.567757", "GeoLat": "-46.6509546", "Nome": "Jessica", "Imagem": "Images/modelo12.jpg", "Idade": "23", "Olhos": "Pretos", "Etnia": "Negra", "Preco": "R$250" }
+            ];*/
+
+            $.ajax({
+                url: '/Mapa/GetPin',
+                dataType: 'json',
+                type: 'GET',
+                data: { etnia: '' },
+                success: function (dados) {
+                    //alert('teste');
+                    // Using the JQuery "each" selector to iterate through the JSON list and drop marker pins
+                    $.each(dados, function (i, item) {
+
+                        //alert('Nome: ' + item.Nome + ', ' + item.Etnia);
+
+                        var marker = new google.maps.Marker({
+                            'position': new google.maps.LatLng(item.GeoLat, item.GeoLong),
+                            'map': map,
+                            'title': item.Nome
+                        });
+
+                        //Inclui o Pin no array
+                        markers.push(marker);
+
+                        // Make the marker-pin red!
+                        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+
+                        // put in some information about each json object - in this case, the opening hours.
+                        var infowindow = new google.maps.InfoWindow({
+                            content: "<html><body><table><tr><td></td><td rowspan='6'><img alt='' src='" + item.Imagem + "' width='75px' /></td><td></td><td>Nome: &nbsp;</td><td>" + item.Nome + "</td></tr><tr><td></td><td></td><td>Idade: &nbsp;</td><td>" + item.Idade + "</td></tr><tr><td></td><td></td><td>Etnia: &nbsp;</td><td>" + item.Etnia + "</td></tr><tr><td></td><td></td><td>Olhos: &nbsp;</td><td>" + item.Olhos + "</td></tr><tr><td></td><td></td><td>Preço: &nbsp;</td><td>R$" + String(item.Preco) + "</td></tr><tr><td></td><td></td><td colspan='2'><a href='../Fornecedor/View1/" + item.Id + "'>Visualizar Perfil</a></td></tr></table></body></html>"
+                        });
+
+                        // finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!
+                        google.maps.event.addListener(marker, 'click', function () {
+                            infowindow.open(map, marker);
+                        });
+
+                        //alert(item.Nome + " - " + item.GeoLong + " x " + item.GeoLat);
+                    });
+
+                    $("#Etnia").val(0);
+                    
+                },
+                error: function (response) {
+                    // products.getProductsShowcase(response.token);
+                    alert('Erro ao consultar os Fornecedores!');
+                }
+            });
+
+
+            /*
+            // Using the JQuery "each" selector to iterate through the JSON list and drop marker pins
+            $.each(data, function (i, item) {
+
+                alert('Nome: ' + item.Nome + ', ' + item.Etnia);
+
+                var marker = new google.maps.Marker({
+                    'position': new google.maps.LatLng(item.GeoLong, item.GeoLat),
+                    'map': mapa,
+                    'title': item.Nome
+                });
+
+                // Make the marker-pin blue!
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+
+                // put in some information about each json object - in this case, the opening hours.
+                var infowindow = new google.maps.InfoWindow({
+                    //content: "<div class='infoDiv'><h2>" + item.PlaceName + "</h2>" + "<div><h4>Opening hours: " + item.OpeningHours + "</h4></div></div>"
+                    content: "<html><body><table><tr><td></td><td rowspan='6'><img alt='' src='" + item.Imagem + "' width='75px' /></td><td></td><td>Nome: &nbsp;</td><td>" + item.Nome + "</td></tr><tr><td></td><td></td><td>Idade: &nbsp;</td><td>" + item.Idade + "</td></tr><tr><td></td><td></td><td>Etnia: &nbsp;</td><td>" + item.Etnia + "</td></tr><tr><td></td><td></td><td>Olhos: &nbsp;</td><td>" + item.Olhos + "</td></tr><tr><td></td><td></td><td>Preço: &nbsp;</td><td>" + item.Preco + "</td></tr><tr><td></td><td></td><td colspan='2'><a href='../Perfil.aspx'>Visualizar Perfil</a></td></tr></table></body></html>"
+                });
+
+                // finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(mapa, marker);
+                });
+
+            });*/
+
+        },
+        atualiza: function () {
+
+            //var map;
+
+            //map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+            var etnia = $("#Etnia").val()
+
+            $.ajax({
+                url: '/Mapa/GetPin',
+                dataType: 'json',
+                type: 'GET',
+                data: { etnia: etnia },
+                success: function (dados) {                    
+
+                    clearMarkers();
+
+                    $.each(dados, function (i, item) {
+
+                        //alert('Nome: ' + item.Nome + ', ' + item.Etnia);
+
+                        var marker = new google.maps.Marker({
+                            'position': new google.maps.LatLng(item.GeoLat, item.GeoLong),
+                            'map': map,
+                            'title': item.Nome
+                        });
+
+                        //Inclui o Pin no array
+                        markers.push(marker);
+
+                        // Make the marker-pin red!
+                        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+
+                        // put in some information about each json object - in this case, the opening hours.
+                        var infowindow = new google.maps.InfoWindow({
+                            //content: "<div class='infoDiv'><h2>" + item.PlaceName + "</h2>" + "<div><h4>Opening hours: " + item.OpeningHours + "</h4></div></div>"
+                            //content: "<html><body><table><tr><td></td><td rowspan='6'><img alt='' src='" + item.Imagem + "' width='75px' /></td><td></td><td>Nome: &nbsp;</td><td>" + item.Nome + "</td></tr><tr><td></td><td></td><td>Idade: &nbsp;</td><td>" + item.Idade + "</td></tr><tr><td></td><td></td><td>Etnia: &nbsp;</td><td>" + item.Etnia + "</td></tr><tr><td></td><td></td><td>Olhos: &nbsp;</td><td>" + item.Olhos + "</td></tr><tr><td></td><td></td><td>Preço: &nbsp;</td><td>" + item.Preco + "</td></tr><tr><td></td><td></td><td colspan='2'><a href='../Perfil.aspx'>Visualizar Perfil</a></td></tr></table></body></html>"
+                            content: "<html><body><table><tr><td></td><td rowspan='6'><img alt='' src='" + item.Imagem + "' width='75px' /></td><td></td><td>Nome: &nbsp;</td><td>" + item.Nome + "</td></tr><tr><td></td><td></td><td>Idade: &nbsp;</td><td>" + item.Idade + "</td></tr><tr><td></td><td></td><td>Etnia: &nbsp;</td><td>" + item.Etnia + "</td></tr><tr><td></td><td></td><td>Olhos: &nbsp;</td><td>" + item.Olhos + "</td></tr><tr><td></td><td></td><td>Preço: &nbsp;</td><td>R$" + String(item.Preco) + "</td></tr><tr><td></td><td></td><td colspan='2'><a href='../Fornecedor/View1/" + item.Id + "'>Visualizar Perfil</a></td></tr></table></body></html>"
+                        });
+
+                        // finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!
+                        google.maps.event.addListener(marker, 'click', function () {
+                            infowindow.open(map, marker);
+                        });
+
+                        //alert(item.Nome + " - " + item.GeoLong + " x " + item.GeoLat);
+                    });
+
+                },
+                error: function (response) {
+                    // products.getProductsShowcase(response.token);
+                    alert('Erro ao consultar os Fornecedores!');
+                }
+            });
+        }
+
+    };
+
+
+
+    /*    $(document).ready(function () {
+            Initialize();
+        });
+
+        function Initialize() {
+
+            // Google has tweaked their interface somewhat - this tells the api to use that new UI
+            google.maps.visualRefresh = true;
+
+            var mapa;
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (p) {
+
+                    var LatLng = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
+                    var mapOptions = {
+                        center: LatLng,
+                        zoom: 14,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+
+                    mapa = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+                    var marker = new google.maps.Marker({
+                        position: LatLng,
+                        map: mapa,
+                        draggable: true,
+                        //icon: 'Images/user2.png'
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                        //title: "<div style = 'height:60px;width:200px'><b>Your location:</b><br />Latitude: " + p.coords.latitude + "<br />Longitude: " + p.coords.longitude
+                    });
+
+                    //marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+
+                });
+            } else {
+
+                var latlng = new google.maps.LatLng(-23.561965, -46.6557745);
+
+                var mapOptions = {
+                    center: LatLng,
+                    zoom: 13,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                mapa = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+                alert('Ops... Não foi possível encontrar a sua localização!.');
+            }
+
+            // a sample list of JSON encoded data of places to visit in Liverpool, UK
+            // you can either make up a JSON list server side, or call it from a controller using JSONResult
+            var data = [
+                    { "Id": 1, "GeoLong": "-23.561965", "GeoLat": "-46.6557745", "Nome": "Ana Bella", "Imagem": "Images/modelo1.jpg", "Idade": "18", "Olhos": "Verdes", "Etnia": "Morena", "Preco": "R$200" },
+                    { "Id": 2, "GeoLong": "-23.5681011", "GeoLat": "-46.6552704", "Nome": "Barbara", "Imagem": "Images/modelo2.png", "Idade": "25", "Olhos": "Verdes", "Etnia": "Morena", "Preco": "R$250" },
+                    { "Id": 3, "GeoLong": "-23.566491", "GeoLat": "-46.6482424", "Nome": "Julia", "Imagem": "Images/modelo4.jpg", "Idade": "19", "Olhos": "Verdes", "Etnia": "Loira", "Preco": "R$275" },
+                    { "Id": 4, "GeoLong": "-23.567757", "GeoLat": "-46.6509546", "Nome": "Jessica", "Imagem": "Images/modelo12.jpg", "Idade": "23", "Olhos": "Pretos", "Etnia": "Negra", "Preco": "R$250" }
+            ];
+
+            // Using the JQuery "each" selector to iterate through the JSON list and drop marker pins
+            $.each(data, function (i, item) {
+                var marker = new google.maps.Marker({
+                    'position': new google.maps.LatLng(item.GeoLong, item.GeoLat),
+                    'map': mapa,
+                    'title': item.Nome
+                });
+
+                // Make the marker-pin blue!
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+
+                // put in some information about each json object - in this case, the opening hours.
+                var infowindow = new google.maps.InfoWindow({
+                    //content: "<div class='infoDiv'><h2>" + item.PlaceName + "</h2>" + "<div><h4>Opening hours: " + item.OpeningHours + "</h4></div></div>"
+                    content: "<html><body><table><tr><td></td><td rowspan='6'><img alt='' src='" + item.Imagem + "' width='75px' /></td><td></td><td>Nome: &nbsp;</td><td>" + item.Nome + "</td></tr><tr><td></td><td></td><td>Idade: &nbsp;</td><td>" + item.Idade + "</td></tr><tr><td></td><td></td><td>Etnia: &nbsp;</td><td>" + item.Etnia + "</td></tr><tr><td></td><td></td><td>Olhos: &nbsp;</td><td>" + item.Olhos + "</td></tr><tr><td></td><td></td><td>Preço: &nbsp;</td><td>" + item.Preco + "</td></tr><tr><td></td><td></td><td colspan='2'><a href='../Perfil.aspx'>Visualizar Perfil</a></td></tr></table></body></html>"
+                });
+
+                // finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(mapa, marker);
+                });
+
+                //alert(item.Nome + " - " + item.GeoLong + " x " + item.GeoLat);
+            });
+        }
+    */
+
+    /*$(function () {
+
+        products.load();
+
+    });
+
+    var products = {
+
+        load: function () {
+
+            // Google has tweaked their interface somewhat - this tells the api to use that new UI
+            google.maps.visualRefresh = true;
+
+            var mapa;
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (p) {
+
+                    var LatLng = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
+                    var mapOptions = {
+                        center: LatLng,
+                        zoom: 14,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+
+                    mapa = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+                    var marker = new google.maps.Marker({
+                        position: LatLng,
+                        map: mapa,
+                        draggable: true,
+                        //icon: 'Images/user2.png'
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                        //title: "<div style = 'height:60px;width:200px'><b>Your location:</b><br />Latitude: " + p.coords.latitude + "<br />Longitude: " + p.coords.longitude
+                    });
+
+                    //marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+
+                });
+            } else {
+
+                var latlng = new google.maps.LatLng(-23.561965, -46.6557745);
+
+                var mapOptions = {
+                    center: LatLng,
+                    zoom: 13,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                mapa = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+                alert('Ops... Não foi possível encontrar a sua localização!.');
+            }
+
+            // a sample list of JSON encoded data of places to visit in Liverpool, UK
+            // you can either make up a JSON list server side, or call it from a controller using JSONResult
+            var data = [
+                    { "Id": 1, "GeoLong": "-23.561965", "GeoLat": "-46.6557745", "Nome": "Ana Bella", "Imagem": "Images/modelo1.jpg", "Idade": "18", "Olhos": "Verdes", "Etnia": "Morena", "Preco": "R$200" },
+                    { "Id": 2, "GeoLong": "-23.5681011", "GeoLat": "-46.6552704", "Nome": "Barbara", "Imagem": "Images/modelo2.png", "Idade": "25", "Olhos": "Verdes", "Etnia": "Morena", "Preco": "R$250" },
+                    { "Id": 3, "GeoLong": "-23.566491", "GeoLat": "-46.6482424", "Nome": "Julia", "Imagem": "Images/modelo4.jpg", "Idade": "19", "Olhos": "Verdes", "Etnia": "Loira", "Preco": "R$275" },
+                    { "Id": 4, "GeoLong": "-23.567757", "GeoLat": "-46.6509546", "Nome": "Jessica", "Imagem": "Images/modelo12.jpg", "Idade": "23", "Olhos": "Pretos", "Etnia": "Negra", "Preco": "R$250" }
+            ];
+
+            // Using the JQuery "each" selector to iterate through the JSON list and drop marker pins
+            $.each(data, function (i, item) {
+                var marker = new google.maps.Marker({
+                    'position': new google.maps.LatLng(item.GeoLong, item.GeoLat),
+                    'map': mapa,
+                    'title': item.Nome
+                });
+
+                // Make the marker-pin blue!
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+
+                // put in some information about each json object - in this case, the opening hours.
+                var infowindow = new google.maps.InfoWindow({
+                    //content: "<div class='infoDiv'><h2>" + item.PlaceName + "</h2>" + "<div><h4>Opening hours: " + item.OpeningHours + "</h4></div></div>"
+                    content: "<html><body><table><tr><td></td><td rowspan='6'><img alt='' src='" + item.Imagem + "' width='75px' /></td><td></td><td>Nome: &nbsp;</td><td>" + item.Nome + "</td></tr><tr><td></td><td></td><td>Idade: &nbsp;</td><td>" + item.Idade + "</td></tr><tr><td></td><td></td><td>Etnia: &nbsp;</td><td>" + item.Etnia + "</td></tr><tr><td></td><td></td><td>Olhos: &nbsp;</td><td>" + item.Olhos + "</td></tr><tr><td></td><td></td><td>Preço: &nbsp;</td><td>" + item.Preco + "</td></tr><tr><td></td><td></td><td colspan='2'><a href='../Perfil.aspx'>Visualizar Perfil</a></td></tr></table></body></html>"
+                });
+
+                // finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(mapa, marker);
+                });
+
+                //alert(item.Nome + " - " + item.GeoLong + " x " + item.GeoLat);
+            });
+
+
+        },
+
+        setPin: function (response) {
+            alert('treste');
+        }
+    };
+    */
+    </script>
+
+    <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="row clearfix header">
+                    <div class="col-md-3 column logo">
+                        <h1>
+                            <img src="~/Images/logoCapitu.png" />
+                        </h1>
+                        <p>O <span>prazer</span> mora ao lado!</p>
+                    </div>
+                    <div class="col-md-9 column">
+                       <div class="styled-select">
+                            @Html.DropDownListFor(model => model.Etnia.Id, (SelectList)ViewBag.EtniaList, new { id = "Etnia", name = "Etnia" })
+                           @*<select>
+                               <option>Buscar Loiras</option>
+                               <option>Buscar Morenas</option>
+                               <option>Buscar Ruivas</option>
+                               <option>Buscar Asiáticas</option>
+                           </select>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div id="map_canvas" style="height: 600px;"></div>
+        </div>
+</body>
+</html>

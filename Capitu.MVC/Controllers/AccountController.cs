@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using Capitu.MVC.Models;
+using Capitu.BLL;
+using Capitu.BE;
 
 namespace Capitu.MVC.Controllers
 {
@@ -40,16 +42,25 @@ namespace Capitu.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
+                //if (Membership.ValidateUser(model.UserName, model.Password))
+                UsuarioBLL userBll = new UsuarioBLL();
+                UsuarioBE user = userBll.ValidarUsuario(model.UserName, model.Password);
+                if(user != null)
                 {
+                    TempData["UsuarioLogado"] = user;
+                    
+                    //SessionManager session = new SessionManager();
+                    //session.IdUsuario = user.IdCliente;
+                    
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    
                     if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Fornecedor");
                     }
                 }
                 else
@@ -69,7 +80,7 @@ namespace Capitu.MVC.Controllers
         {
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Mapa");
         }
 
         //

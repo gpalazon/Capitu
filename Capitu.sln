@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capitu.BLL", "Capitu.BLL\Capitu.BLL.csproj", "{84CC945F-71C9-41C8-9C97-3CF38A191C58}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capitu.DAL", "Capitu.DAL\Capitu.DAL.csproj", "{728ED022-54AF-4B02-87FD-949270423BE8}"
@@ -14,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMAP", "GMAP\GMAP.csproj", "{92FBD9BC-3709-4205-A1FA-E35F3F766B7F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capitu.MVC", "Capitu.MVC\Capitu.MVC.csproj", "{4F27415B-899A-4644-9D72-B2F1B9AA0389}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capitu.Infra", "Capitu.Infra\Capitu.Infra.csproj", "{1EE0322F-C458-478F-A2CE-C8BA72DF77D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capitu.Service", "Capitu.Service\Capitu.Service.csproj", "{3F423285-0982-41FE-A373-E0AC064E5660}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +55,14 @@ Global
 		{4F27415B-899A-4644-9D72-B2F1B9AA0389}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F27415B-899A-4644-9D72-B2F1B9AA0389}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F27415B-899A-4644-9D72-B2F1B9AA0389}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EE0322F-C458-478F-A2CE-C8BA72DF77D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EE0322F-C458-478F-A2CE-C8BA72DF77D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EE0322F-C458-478F-A2CE-C8BA72DF77D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EE0322F-C458-478F-A2CE-C8BA72DF77D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F423285-0982-41FE-A373-E0AC064E5660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F423285-0982-41FE-A373-E0AC064E5660}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F423285-0982-41FE-A373-E0AC064E5660}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F423285-0982-41FE-A373-E0AC064E5660}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

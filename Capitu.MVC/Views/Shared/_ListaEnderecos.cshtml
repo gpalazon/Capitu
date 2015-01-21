@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Capitu.MVC.Models.EnderecoVO>
+
+<script type="text/javascript">
+
+    $(function () {        
+        //alert('partial load')
+    });
+
+    var ObjEnviar = {
+        save: function (endereco, lat, long) {
+            
+            //alert(endereco);
+
+            //$("#formLista #Id").val(param);
+            //$("#formLista").submit();
+            $('#Endereco').val(endereco);
+            $('#Latitude').val(lat);
+            $('#Longitude').val(long);
+
+            //alert(lat + '-' + long);
+
+            //$('#listaEnderecos').css('visibility', 'hidden');
+            $('#listaEnderecos').hide();
+        }
+    };
+
+
+    </script>
+
+    
+
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Endereco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            <a href="javascript:ObjEnviar.save('@item.Endereco',@item.Latitude,@item.Longitude)">
+                Selecionar
+            </a>
+            @*@Html.ActionLink("Selecionar", "Select", new { id=item.Id }) |*@
+            @*<span>
+                <input type="button" onclick="AtualizaEndereco(@item.Endereco, @item.Latitude, @item.Longitude)"
+
+            </span>*@
+        </td>
+    </tr>
+}
+
+</table>
+
+

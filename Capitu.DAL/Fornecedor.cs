@@ -19,17 +19,19 @@ namespace Capitu.DAL
         public int UsuarioId { get; set; }
         public int StatusId { get; set; }
         public int AvatarId { get; set; }
-        public Nullable<decimal> Latitude { get; set; }
-        public Nullable<decimal> Longitude { get; set; }
-        public Nullable<double> Altura { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
+        public Nullable<decimal> Altura { get; set; }
         public Nullable<int> Peso { get; set; }
         public Nullable<System.DateTime> DtNascimento { get; set; }
         public string Olhos { get; set; }
-        public Nullable<decimal> Preco { get; set; }
+        public decimal Preco { get; set; }
         public string Descricao { get; set; }
-        public Nullable<int> EnderecoId { get; set; }
         public string Etnia { get; set; }
         public Nullable<int> ImagemAvatarId { get; set; }
         public Nullable<int> ImagemPerfilId { get; set; }
+        public string Telefone { get; set; }
+        public Nullable<int> EtniaId { get; set; }
+        public string Endereco { get; set; }
     }
 }

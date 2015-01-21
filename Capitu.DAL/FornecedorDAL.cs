@@ -19,17 +19,22 @@ namespace Capitu.DAL
         public List<FornecedorBE> GetFornecedores(int idEtnia, string nome)
         {
 
-            using (CapituDBEntities db = new CapituDBEntities())
+            using (CAPITUDBEntities db = new CAPITUDBEntities())
             {
                 var q = from f in db.Fornecedor
                         from ip in db.Imagem.Where(x => x.Id == f.ImagemPerfilId).DefaultIfEmpty()
-                        from ia in db.Avatar.Where(x => x.Id == f.ImagemAvatarId).DefaultIfEmpty()
+                        join e in db.Etnia on f.EtniaId equals e.Id
+                        //from ia in db.Avatar.Where(x => x.Id == f.ImagemAvatarId).DefaultIfEmpty()
                         join u in db.Usuario on f.UsuarioId equals u.Id
-                        //join a in context.Avatar on f.AvatarId equals a.Id
+                        where idEtnia <= 0 || e.Id == idEtnia
                         select new FornecedorBE()
                         {
                             Id = f.Id,
-                            Etnia = f.Etnia,
+                            Etnia = new EtniaBE()                                                         
+                            {
+                                Id = e.Id,
+                                DsEtnia = e.DsEtnia
+                            },
                             //Idade = Idade(f.DtNascimento.Value),
                             Idade = 23,
                             Usuario = new UsuarioBE()
@@ -48,13 +53,15 @@ namespace Capitu.DAL
                             },*/
                             ImgPerfilId = ip.Id,
                             ImgPerfilUrl = ip.UrlImagem,
-                            Latitude = f.Latitude.Value,
-                            Longitude = f.Longitude.Value,
+                            Latitude = f.Latitude,
+                            Longitude = f.Longitude,
                             Nome = f.Nome,
                             Olhos = f.Olhos,
-                            Preco = f.Preco.Value,
+                            Preco = f.Preco,
                             Peso = f.Peso.Value,
-                            Descricao = f.Descricao
+                            Descricao = f.Descricao,
+                            Telefone = f.Telefone,
+                            Endereco = f.Endereco
                         };
 
                 return q.ToList();
@@ -64,18 +71,23 @@ namespace Capitu.DAL
         public FornecedorBE GetFornecedor(int idFornecedor = 0)
         {
 
-            using (CapituDBEntities db = new CapituDBEntities())
+            using (CAPITUDBEntities db = new CAPITUDBEntities())
             {
                 var q = from f in db.Fornecedor
                         from ip in db.Imagem.Where(x => x.Id == f.ImagemPerfilId).DefaultIfEmpty()
-                        from ia in db.Avatar.Where(x => x.Id == f.ImagemAvatarId).DefaultIfEmpty()
+                        join e in db.Etnia on f.EtniaId equals e.Id
+                        //from ia in db.Avatar.Where(x => x.Id == f.ImagemAvatarId).DefaultIfEmpty()
                         join u in db.Usuario on f.UsuarioId equals u.Id
                         where f.Id == idFornecedor
                         //join a in context.Avatar on f.AvatarId equals a.Id
                         select new FornecedorBE()
                         {
                             Id = f.Id,
-                            Etnia = f.Etnia,
+                            Etnia = new EtniaBE()
+                            {
+                                Id = e.Id,
+                                DsEtnia = e.DsEtnia
+                            },
                             //Idade = Idade(f.DtNascimento.Value),
                             Usuario = new UsuarioBE()
                             {
@@ -87,6 +99,7 @@ namespace Capitu.DAL
                                 Login = u.Login
                             },
                             Idade = 23,
+                            Altura = f.Altura.Value,
                             DtNascimento = f.DtNascimento.Value,
                             /*ImgPerfil = new ImagemBE(){                            
                                 Id = ip.Id, 
@@ -94,13 +107,15 @@ namespace Capitu.DAL
                             },*/
                             ImgPerfilId = ip.Id,
                             ImgPerfilUrl = ip.UrlImagem,
-                            Latitude = f.Latitude.Value,
-                            Longitude = f.Longitude.Value,
+                            Latitude = f.Latitude,
+                            Longitude = f.Longitude,
                             Nome = f.Nome,
                             Olhos = f.Olhos,
-                            Preco = f.Preco.Value,
+                            Preco = f.Preco,
                             Peso = f.Peso.Value,
-                            Descricao = f.Descricao
+                            Descricao = f.Descricao,
+                            Telefone = f.Telefone,
+                            Endereco = f.Endereco
                         };
 
 
@@ -110,7 +125,7 @@ namespace Capitu.DAL
                 {
                     var qi = from f in db.FotosPerfil
                              join i in db.Imagem on f.ImagemId equals i.Id
-                             where f.FornecedorId == fornecedor.Id
+                             where f.FornecedorId == 5/*fornecedor.Id*/
                              select i;
 
                     fornecedor.Fotos = new List<ImagemBE>();
@@ -128,22 +143,24 @@ namespace Capitu.DAL
 
         public int Incluir(FornecedorBE fornecedor)
         {
-            using (CapituDBEntities db = new CapituDBEntities())
+            using (CAPITUDBEntities db = new CAPITUDBEntities())
             {
                 Fornecedor f = new Fornecedor()
                 {
                     Altura = fornecedor.Altura,
                     Descricao = fornecedor.Descricao,
                     DtNascimento = fornecedor.DtNascimento,
-                    Etnia = fornecedor.Etnia,
+                    EtniaId = fornecedor.Etnia.Id,
                     ImagemAvatarId = fornecedor.ImgAvatarId,
-                    ImagemPerfilId = fornecedor.ImgPerfilId,
+                    ImagemPerfilId = fornecedor.ImgPerfilId.GetValueOrDefault(1),
                     Latitude = fornecedor.Latitude,
                     Longitude = fornecedor.Longitude,
                     Nome = fornecedor.Nome,
                     Olhos = fornecedor.Olhos,
                     Peso = fornecedor.Peso,
                     Preco = fornecedor.Preco,
+                    Telefone = fornecedor.Telefone,
+                    Endereco = fornecedor.Endereco,
                     //StatusId = fornecedor.StatusId
                     UsuarioId = new UsuarioDAL().Incluir(fornecedor.Usuario)
                 };
@@ -158,22 +175,24 @@ namespace Capitu.DAL
 
         public void Alterar(FornecedorBE fornecedor)
         {
-            using (CapituDBEntities db = new CapituDBEntities())
+            using (CAPITUDBEntities db = new CAPITUDBEntities())
             {
                 Fornecedor f = db.Fornecedor.Find(fornecedor.Id);
 
                 f.Altura = fornecedor.Altura;
                 f.Descricao = fornecedor.Descricao;
                 f.DtNascimento = fornecedor.DtNascimento;
-                f.Etnia = fornecedor.Etnia;
+                f.EtniaId = fornecedor.Etnia.Id;
                 f.ImagemAvatarId = fornecedor.ImgAvatarId;
-                f.ImagemPerfilId = fornecedor.ImgPerfilId;
+                f.ImagemPerfilId = fornecedor.ImgPerfilId.GetValueOrDefault(1);
                 f.Latitude = fornecedor.Latitude;
                 f.Longitude = fornecedor.Longitude;
                 f.Nome = fornecedor.Nome;
                 f.Olhos = fornecedor.Olhos;
                 f.Peso = fornecedor.Peso;
                 f.Preco = fornecedor.Preco;
+                f.Telefone = fornecedor.Telefone;
+                f.Endereco = fornecedor.Endereco;
                 //StatusId = fornecedor.StatusId                                               
 
                 db.SaveChanges();
@@ -183,7 +202,7 @@ namespace Capitu.DAL
 
         public void Delete(int idFornecedor)
         {
-            using (CapituDBEntities db = new CapituDBEntities())
+            using (CAPITUDBEntities db = new CAPITUDBEntities())
             {
                 Fornecedor f = db.Fornecedor.Find(idFornecedor);
 

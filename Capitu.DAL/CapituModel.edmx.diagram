@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="1e64dacd0f48485f995bb3bd24cdee6c" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="CapituDBModel.Avatar" Width="1.5" PointX="0.625" PointY="12.375" />
-        <EntityTypeShape EntityType="CapituDBModel.Cidade" Width="1.5" PointX="11.224199378501716" PointY="22.407326321307256" />
+        <EntityTypeShape EntityType="CapituDBModel.Cidade" Width="1.5" PointX="12.625" PointY="13.5" />
         <EntityTypeShape EntityType="CapituDBModel.Contato" Width="1.5" PointX="2.375" PointY="10.625" />
         <EntityTypeShape EntityType="CapituDBModel.Endereco" Width="1.5" PointX="4.25" PointY="10.625" />
         <EntityTypeShape EntityType="CapituDBModel.FotosPerfil" Width="1.5" PointX="2.375" PointY="12.5" />
@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="CapituDBModel.Pais" Width="1.5" PointX="8.125" PointY="10.75" />
         <EntityTypeShape EntityType="CapituDBModel.UF" Width="1.5" PointX="8.125" PointY="12.375" />
         <EntityTypeShape EntityType="CapituDBModel.Usuario" Width="1.5" PointX="10.125" PointY="10.625" />
-        <EntityTypeShape EntityType="CapituDBModel.Fornecedor" Width="1.5" PointX="0.18208056324258473" PointY="20.882395917960626" />
+        <EntityTypeShape EntityType="CapituDBModel.Fornecedor" Width="1.5" PointX="6.125" PointY="10.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

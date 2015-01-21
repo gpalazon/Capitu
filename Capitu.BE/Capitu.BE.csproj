@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContatoBE.cs" />
+    <Compile Include="EtniaBE.cs" />
     <Compile Include="FornecedorBE.cs" />
     <Compile Include="ImagemBE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

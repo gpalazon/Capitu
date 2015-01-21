@@ -39,26 +39,66 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -74,11 +114,14 @@
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -86,9 +129,11 @@
     </Reference>
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -148,6 +193,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContatoController.cs" />
+    <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MapaController.cs" />
@@ -156,9 +202,12 @@
     </Compile>
     <Compile Include="Helpers\Util.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\EnderecoVO.cs" />
+    <Compile Include="Models\VM\FiltroVM.cs" />
     <Compile Include="Models\VM\FornecedorVM.cs" />
     <Compile Include="Models\VO\ContatoVO.cs" />
     <Compile Include="Models\CustomAtributtes.cs" />
+    <Compile Include="Models\VO\EtniaVO.cs" />
     <Compile Include="Models\VO\FornecedorVO.cs" />
     <Compile Include="Models\VO\ImagemVO.cs" />
     <Compile Include="Models\VO\MapVO.cs" />
@@ -168,6 +217,10 @@
   <ItemGroup>
     <Content Include="App_Data\CapituDB.sdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\Database1.mdf" />
+    <Content Include="App_Data\Database1_log.ldf">
+      <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
@@ -248,10 +301,16 @@
     <Content Include="Images\apple-touch-icon-144-precomposed.png" />
     <Content Include="Images\apple-touch-icon-57-precomposed.png" />
     <Content Include="Images\apple-touch-icon-72-precomposed.png" />
+    <Content Include="Images\bgHotsite3.png" />
     <Content Include="Images\favicon.png" />
     <Content Include="Images\favicon_b.png" />
     <Content Include="Images\glyphicons-halflings-white.png" />
     <Content Include="Images\glyphicons-halflings.png" />
+    <Content Include="Images\icoDown.png" />
+    <Content Include="Images\modelo1p.jpg" />
+    <Content Include="Images\modelo2p.jpg" />
+    <Content Include="Images\modelo4p.jpg" />
+    <Content Include="Images\modelo6p.jpg" />
     <Content Include="Images\perfil\Thumbs.db" />
     <None Include="Properties\PublishProfiles\Gustavo.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
@@ -274,6 +333,7 @@
     <Content Include="Images\perfil\fullimage2.jpg" />
     <Content Include="Images\perfil\fullimage3 - Copia.jpg" />
     <Content Include="Images\perfil\fullimage3.jpg" />
+    <Content Include="Perfil.html" />
     <Content Include="Scripts\Index.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -297,7 +357,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -331,6 +393,9 @@
     <Content Include="Views\Contato\Index.cshtml" />
     <Content Include="Views\Fornecedor\Perfil.cshtml" />
     <Content Include="Views\Fornecedor\View1.cshtml" />
+    <Content Include="Views\Shared\_LayoutMobCapitu.cshtml" />
+    <Content Include="Views\Mapa\View1.cshtml" />
+    <Content Include="Views\Shared\_ListaEnderecos.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -344,6 +409,10 @@
     <ProjectReference Include="..\Capitu.BLL\Capitu.BLL.csproj">
       <Project>{84cc945f-71c9-41c8-9c97-3cf38a191c58}</Project>
       <Name>Capitu.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Capitu.Infra\Capitu.Infra.csproj">
+      <Project>{1ee0322f-c458-478f-a2ce-c8ba72df77d2}</Project>
+      <Name>Capitu.Infra</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

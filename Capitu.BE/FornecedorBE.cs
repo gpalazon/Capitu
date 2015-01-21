@@ -22,11 +22,12 @@ namespace Capitu.BE
         
         public int Idade { get; set; }
         
-        public int Altura { get; set; }
+        public decimal Altura { get; set; }
         
         public string Olhos { get; set; }
         
-        public string Etnia { get; set; }
+        //public string Etnia { get; set; }
+        public EtniaBE Etnia { get; set; }
         
         public int Peso { get; set; }
 
@@ -50,5 +51,9 @@ namespace Capitu.BE
         public DateTime DtNascimento { get; set; }
 
         public UsuarioBE Usuario { get; set; }
+
+        public string Telefone { get; set; }
+
+        public string Endereco { get; set; }
     }
 }

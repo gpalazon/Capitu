@@ -13,7 +13,7 @@ namespace Capitu.DAL
         public UsuarioBE Get(int idUsuario)
         {
 
-            using (ACapituDBEntities db = new ACapituDBEntities())
+            using (CAPITUDBEntities db = new CAPITUDBEntities())
             {
                 Usuario user = db.Usuario.Find(idUsuario);
                 
@@ -29,10 +29,31 @@ namespace Capitu.DAL
             }
         }
 
+        public UsuarioBE Validar(string login, string senha)
+        {
+
+            using (CAPITUDBEntities db = new CAPITUDBEntities())
+            {
+                var q = from u in db.Usuario
+                        where u.Login == login
+                        && u.Senha == senha
+                        select new UsuarioBE()
+                        {
+                            Id = u.Id,
+                            Login = u.Login,
+                            Email = u.Email,
+                            Facebook = u.Facebook,
+                            FlAtivo = u.FlAtivo.Value
+                        };
+
+                return (UsuarioBE)q.FirstOrDefault();                
+            }
+        }
+
         public int Incluir(UsuarioBE user) 
         {
 
-            using (ACapituDBEntities db = new ACapituDBEntities()) 
+            using (CAPITUDBEntities db = new CAPITUDBEntities()) 
             {
                 Usuario usuario = new Usuario()
                 {
@@ -55,7 +76,7 @@ namespace Capitu.DAL
         public void Alterar(UsuarioBE user)
         {
 
-            using (ACapituDBEntities db = new ACapituDBEntities())
+            using (CAPITUDBEntities db = new CAPITUDBEntities())
             {
                 Usuario usuario = db.Usuario.Find(user.Id);                
 

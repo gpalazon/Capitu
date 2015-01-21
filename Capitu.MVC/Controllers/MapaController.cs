@@ -15,8 +15,32 @@ namespace Capitu.MVC.Controllers
         // GET: /Mapa/
 
         public ActionResult Index()
-        {            
-            return View();            
+        {
+            ConfigurarViewBag();
+            return View("View1");
+            //return View(); 
+        }
+
+        public void ConfigurarViewBag()
+        {
+            EtniaBLL etBll = new EtniaBLL();
+            
+            List<SelectListItem> etList = new List<SelectListItem>();
+
+            etList.Add(new SelectListItem { Text = "BUSCAR POR...", Value = "0" }); 
+
+            foreach (EtniaBE item in etBll.GetEtnias())
+            {
+                etList.Add(new SelectListItem { Text = "BUSCAR POR " + item.DsEtnia + "S", Value = item.Id.ToString() }); 
+            }
+
+            etList[etList.Count - 1].Selected = true;
+
+            //ViewBag.EtniaList = etList;
+            ViewBag.EtniaList = new SelectList(etList, "Value", "Text");
+            
+            ViewBag.Message = "...";
+
         }
 
         /*public ActionResult Index()
@@ -47,20 +71,20 @@ namespace Capitu.MVC.Controllers
         }*/
 
 
-        public ActionResult GetPin()
+        public ActionResult GetPin(string etnia)
         {
 
             List<PinVO> pinList = new List<PinVO>();
 
-            FornecedorBLL fornecedorBll = new FornecedorBLL();            
+            FornecedorBLL fornecedorBll = new FornecedorBLL();
 
-            foreach (FornecedorBE f in fornecedorBll.GetFornecedores(0, string.Empty))
+            foreach (FornecedorBE f in fornecedorBll.GetFornecedores(string.IsNullOrEmpty(etnia) ? 0 : int.Parse(etnia), string.Empty))
             {
                 FornecedorVO fornVo = new FornecedorVO();
 
                 pinList.Add(new PinVO()
                 {
-                    Etnia = f.Etnia,
+                    Etnia = f.Etnia.DsEtnia,
                     GeoLat = (Double)f.Latitude,
                     GeoLong = (Double)f.Longitude,
                     Id = f.Id,
@@ -73,7 +97,7 @@ namespace Capitu.MVC.Controllers
             }
 
 
-            pinList.Add(new PinVO()
+            /*pinList.Add(new PinVO()
             {
                 Etnia =  "Morena",
                 GeoLat = -46.6557745,
@@ -124,6 +148,7 @@ namespace Capitu.MVC.Controllers
                 Olhos = "Pretos",
                 Preco = 250
             });
+             */
 
             /*{ "Id": 1, "GeoLong": "", "GeoLat": "-46.6557745", "Nome": "Ana Bella", "Imagem": "Images/modelo1.jpg", "Idade": "18", "Olhos": "Verdes", "Etnia": "Morena", "Preco": "R$200" },
                 { "Id": 2, "GeoLong": "-23.5681011", "GeoLat": "-46.6552704", "Nome": "Barbara", "Imagem": "Images/modelo2.png", "Idade": "25", "Olhos": "Verdes", "Etnia": "Morena", "Preco": "R$250" },

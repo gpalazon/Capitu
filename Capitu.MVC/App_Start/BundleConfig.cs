@@ -24,6 +24,9 @@ namespace Capitu.MVC
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
+            bundles.Add(new StyleBundle("~/Content/style").Include("~/Content/css/style.css",
+                "~/Content/css/bootstrap.min.css"));        
+
             bundles.Add(new StyleBundle("~/Content/mobilecss").Include("~/Content/jquery.mobile*"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

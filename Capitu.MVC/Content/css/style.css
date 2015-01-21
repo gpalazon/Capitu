@@ -1,10 +1,17 @@
 	/* Geral */
 		
-		body{
-			background-color: #000;
-			font-family: 'Open Sans';
-			color: #fff;
+		body{			
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.428571429;
+            color: #333333;
+            background-color: #ffffff;
 		}
+
+        /*background-color: #000;*/
+			/*font-family: 'Open Sans';*/
+			/*color: #fff;*/
+
 		.container{
 			width: 100%;
 		}
@@ -135,6 +142,7 @@
 			text-shadow: 3px 2px 0 #9b001e;
 			text-transform: uppercase;
 			width: 100%;
+            text-align: center;
 		}
 		
 		.btnDefault:active {

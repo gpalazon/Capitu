@@ -11,7 +11,7 @@ namespace Capitu.DAL
     {
         public void Salvar(Contato contato)
         {
-            using (ACapituDBEntities db = new ACapituDBEntities())
+            using (CAPITUDBEntities db = new CAPITUDBEntities())
             {
                 db.Contato.Add(contato);
                 db.SaveChanges();
@@ -20,7 +20,7 @@ namespace Capitu.DAL
 
         public List<ContatoBE> GetContatos()
         {
-            using (ACapituDBEntities db = new ACapituDBEntities())
+            using (CAPITUDBEntities db = new CAPITUDBEntities())
             {
                 var q = from c in db.Contato
                         select new ContatoBE()

@@ -23,7 +23,7 @@ namespace Capitu.MVC.Helpers
         public static string InsereAtributos(FornecedorVO model) 
         {
             //string "Morena, Olhos verdes, 28 anos, 1.80 de altura, 60 kilos."
-            string ret = model.Etnia;
+            string ret = model.Etnia.DsEtnia;
             
             if (model.Olhos != null)
                 ret += ", Olhos " + model.Olhos;

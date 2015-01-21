@@ -20,5 +20,6 @@ namespace Capitu.DAL
         public string Email { get; set; }
         public string Facebook { get; set; }
         public Nullable<bool> FlAtivo { get; set; }
+        public string Senha { get; set; }
     }
 }
