@@ -1,0 +1,136 @@
+
+        body {
+            margin: 0;
+            font-family: 'Architects Daughter', cursive;
+        }
+
+        .mainContainer {
+            width: 100%;
+            float: left;
+            background-color: #eee;
+        }
+
+       .bodyContainer {
+            background-color: #fafafa;
+            bottom: 0;
+            box-sizing: border-box;
+            height: auto;
+            min-height: 82%;
+            padding: 20px;
+            position: fixed;
+            top: 10%;
+            width: 100%;
+            z-index: 0;
+        }
+
+        .header {
+            background-color: #2c2c2c;
+            height: 80px;
+            padding: 15px 0 0;
+            /*position: fixed;*/
+            top: 0;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .footer {
+            width: 100%;
+            height: 8%;
+            bottom: 0;
+            box-sizing: border-box;
+            padding: 0.5% 2% 0 2%;
+            position: fixed;
+            background-color: #eee;
+            z-index: 1;
+        }
+
+        iframe {
+            height: auto;
+            min-height: 100%;
+            position: fixed;
+            top: 60px;
+            width: 100%;
+        }
+
+        /* Forms */
+        .btnDefault {
+            width: 100%;
+            padding: 4px 10% 2px 10%;
+            box-sizing: border-box;
+            cursor: pointer;
+            color: #fff;
+            background-color: #ff0072;
+            border-color: transparent transparent #d00043 transparent;
+            border-style: none none solid none;
+            border-width: 0 0 3px 0;
+            font-weight: bold;
+            font-family: 'Architects Daughter', cursive;
+            float: left;
+            text-align: center;
+        }
+        .btnDefault:hover {
+            cursor: pointer;
+        }
+        .btnDefault:active {
+            border-color: transparent transparent #ff0072 transparent;
+            border-style: none none solid none;
+            border-width: 0 0 3px 0;
+        }
+
+        .inputTxt{
+            background-color: #fefefe;
+            box-shadow: 0px -4px 0px #f1f1f1 inset;
+            padding: 0 0 0 10px;
+            box-sizing: border-box;
+            height: 30px;
+            border: 0;
+            font-family: 'Architects Daughter', cursive;
+            width: 100%;
+        }
+
+        .logo{
+            box-sizing: border-box;
+            color: #ff0072;
+            float: left;
+            font-weight: bold;
+            margin: -15px 0 0;
+            padding: 0 0 8px 20px;
+            width: 30%;
+        }
+
+        .logo h1{
+            margin: 10px 10px 0 -10px;
+            font-size: 36px;
+        }
+        .inputSearchHome{
+            width: 100%;
+            background-image: url("../Images/icos/icoSearch.png");
+            background-repeat: no-repeat;
+            height: 35px;
+            border: none;
+            background-size: 20px;
+            background-position: 5px 6px;
+            padding: 5px 0 0 30px;
+        }
+
+        .inputSearch{
+            background-color: #2c2c2c;
+            border-bottom: 1px solid #444;
+        }
+        .inputSearch:focus{
+            color: #fff;
+            outline: none;
+        }
+
+        .selectSearchHome{
+            float: left;
+            width: 70%;
+            box-sizing: border-box;
+            padding: 4px 20px;
+            border: 0;
+            outline: 0;
+            background-color: #333;
+            color: #fff;
+            border-bottom: 1px solid #444;
+        }
+ 

@@ -1,0 +1,134 @@
+﻿@model Capitu.MVC.Models.FornecedorVO
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Fornecedor</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nome)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nome)
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.UsuarioId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UsuarioId)
+            @Html.ValidationMessageFor(model => model.UsuarioId)
+        </div>*@
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.StatusId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StatusId)
+            @Html.ValidationMessageFor(model => model.StatusId)
+        </div>*@
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.AvatarId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AvatarId)
+            @Html.ValidationMessageFor(model => model.AvatarId)
+        </div>*@
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Latitude)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Latitude)
+            @Html.ValidationMessageFor(model => model.Latitude)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Longitude)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Longitude)
+            @Html.ValidationMessageFor(model => model.Longitude)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Altura)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Altura)
+            @Html.ValidationMessageFor(model => model.Altura)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Peso)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Peso)
+            @Html.ValidationMessageFor(model => model.Peso)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DtNascimento)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DtNascimento)
+            @Html.ValidationMessageFor(model => model.DtNascimento)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Etnia)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Etnia)
+            @Html.ValidationMessageFor(model => model.Etnia)
+        </div>        
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Olhos)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Olhos)
+            @Html.ValidationMessageFor(model => model.Olhos)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Preco)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Preco)
+            @Html.ValidationMessageFor(model => model.Preco)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Descricao)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Descricao)
+            @Html.ValidationMessageFor(model => model.Descricao)
+        </div>        
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
