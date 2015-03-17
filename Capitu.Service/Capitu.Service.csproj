@@ -74,6 +74,7 @@
     <Folder Include="DTO\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\capituwcf.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

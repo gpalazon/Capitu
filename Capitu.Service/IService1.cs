@@ -14,8 +14,8 @@ namespace Capitu.Service
     {
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, 
-            BodyStyle = WebMessageBodyStyle.Wrapped, 
-            UriTemplate = "getpin/")]
+            BodyStyle = WebMessageBodyStyle.Wrapped, RequestFormat = WebMessageFormat.Json,
+            UriTemplate = "/GetPin")]
         List<FornecedorDTO> GetPin();
 
         [OperationContract]
