@@ -158,17 +158,51 @@
             }
 
 
-            /*
+            
             // a sample list of JSON encoded data of places to visit in Liverpool, UK
             // you can either make up a JSON list server side, or call it from a controller using JSONResult
             var data = [
-                    { "Id": 1, "GeoLong": "-23.561965", "GeoLat": "-46.6557745", "Nome": "Ana Bella", "Imagem": "Images/modelo1.jpg", "Idade": "18", "Olhos": "Verdes", "Etnia": "Morena", "Preco": "R$200" },
-                    { "Id": 2, "GeoLong": "-23.5681011", "GeoLat": "-46.6552704", "Nome": "Barbara", "Imagem": "Images/modelo2.png", "Idade": "25", "Olhos": "Verdes", "Etnia": "Morena", "Preco": "R$250" },
-                    { "Id": 3, "GeoLong": "-23.566491", "GeoLat": "-46.6482424", "Nome": "Julia", "Imagem": "Images/modelo4.jpg", "Idade": "19", "Olhos": "Verdes", "Etnia": "Loira", "Preco": "R$275" },
-                    { "Id": 4, "GeoLong": "-23.567757", "GeoLat": "-46.6509546", "Nome": "Jessica", "Imagem": "Images/modelo12.jpg", "Idade": "23", "Olhos": "Pretos", "Etnia": "Negra", "Preco": "R$250" }
-            ];*/
+                { "Id": 5, "Nome": "Ana Bella", "Imagem": "Images/modelo1p.jpg", "Olhos": "Verdes", "Etnia": "Morena", "Idade": 23, "GeoLong": -46.6557745, "GeoLat": -23.561965, "Preco": 250 },
+                { "Id": 9, "Nome": "Bruna", "Imagem": "Images/modelo4p.jpg", "Olhos": "Pretos", "Etnia": "Loira", "Idade": 23, "GeoLong": -46.6552704, "GeoLat": -23.5681011, "Preco": 275 },
+                { "Id": 11, "Nome": "Barbara", "Imagem": "Images/modelo6p.jpg", "Olhos": "Verdes", "Etnia": "Loira", "Idade": 23, "GeoLong": -46.6552704, "GeoLat": -23.566491, "Preco": 300 },
+                { "Id": 12, "Nome": "Julia", "Imagem": "Images/modelo2p.jpg", "Olhos": "Pretos", "Etnia": "Negra", "Idade": 23, "GeoLong": -46.6509546, "GeoLat": -23.567757, "Preco": 300 },
+                { "Id": 13, "Nome": "Barbara", "Imagem": "Images/modelo1p.jpg", "Olhos": "Azuis", "Etnia": "Ruiva", "Idade": 23, "GeoLong": -46.7996839, "GeoLat": -23.6962756, "Preco": 275 },
+                { "Id": 14, "Nome": "Juliana ", "Imagem": "Images/modelo4p.jpg", "Olhos": "pretos ", "Etnia": "Assiática", "Idade": 23, "GeoLong": -46.5611202, "GeoLat": -23.7263789, "Preco": 200 }
+            ];
 
-            $.ajax({
+
+            $.each(dados, function (i, item) {
+
+                //alert('Nome: ' + item.Nome + ', ' + item.Etnia);
+
+                var marker = new google.maps.Marker({
+                    'position': new google.maps.LatLng(item.GeoLat, item.GeoLong),
+                    'map': map,
+                    'title': item.Nome
+                });
+
+                //Inclui o Pin no array
+                markers.push(marker);
+
+                // Make the marker-pin red!
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+
+                // put in some information about each json object - in this case, the opening hours.
+                var infowindow = new google.maps.InfoWindow({
+                    content: "<html><body><table><tr><td></td><td rowspan='6'><img alt='' src='" + item.Imagem + "' width='75px' /></td><td></td><td>Nome: &nbsp;</td><td>" + item.Nome + "</td></tr><tr><td></td><td></td><td>Idade: &nbsp;</td><td>" + item.Idade + "</td></tr><tr><td></td><td></td><td>Etnia: &nbsp;</td><td>" + item.Etnia + "</td></tr><tr><td></td><td></td><td>Olhos: &nbsp;</td><td>" + item.Olhos + "</td></tr><tr><td></td><td></td><td>Preço: &nbsp;</td><td>R$" + String(item.Preco) + "</td></tr><tr><td></td><td></td><td colspan='2'><a href='../Fornecedor/View1/" + item.Id + "'>Visualizar Perfil</a></td></tr></table></body></html>"
+                });
+
+                // finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+
+                //alert(item.Nome + " - " + item.GeoLong + " x " + item.GeoLat);
+            });
+
+            $("#Etnia").val(0);
+
+            /*$.ajax({
                 url: '/Mapa/GetPin',
                 dataType: 'json',
                 type: 'GET',
@@ -212,7 +246,7 @@
                     // products.getProductsShowcase(response.token);
                     alert('Erro ao consultar os Fornecedores!');
                 }
-            });
+            });*/
 
 
             /*

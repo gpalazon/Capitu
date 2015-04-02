@@ -17,11 +17,21 @@ namespace Capitu.Service
         void DoWork();
 
         [OperationContract]
-        [Description("Returns a copy of the restaurant menu.")]
+        [Description("Retorna uma lista com todos os fornecedores cadastrados")]
         [WebGet(BodyStyle = WebMessageBodyStyle.Bare,
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json)]
         [AspNetCacheProfile("CacheFor10Seconds")]
         List<FornecedorDTO> GetFornecedores();
+
+
+        [OperationContract]
+        [Description("Retorna o Fornecedor de acordo com o ID.")]
+        [WebInvoke(Method="GET",
+        BodyStyle = WebMessageBodyStyle.Bare,
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/GetFornecedor?id={id}")]        
+        FornecedorDTO GetFornecedorById(int id);
     }
 }

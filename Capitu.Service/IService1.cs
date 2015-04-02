@@ -66,8 +66,22 @@ namespace Capitu.Service
         [DataMember]
         public string Imagem { get; set; }
 
+        [DataMember]
+        public List<ImagemDTO> Fotos { get; set; }
+
     }
 
+    [DataContract]
+
+    public class ImagemDTO
+    {
+        [DataMember]
+        public int Id { get; set; }
+
+        [DataMember]
+        public string UrlImagem { get; set; }
+
+    }
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]
     public class CompositeType

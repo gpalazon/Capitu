@@ -17,6 +17,42 @@ namespace Capitu.Service
         {
         }
 
+        public FornecedorDTO GetFornecedorById(int id) 
+        {
+            
+            FornecedorBLL fornBll = new FornecedorBLL();
+            FornecedorBE f = new FornecedorBE();
+            f = fornBll.GetFornecedor(id);
+            FornecedorDTO fornecedor = new FornecedorDTO()
+            {
+                Altura = f.Altura,
+                Endereco = f.Endereco,
+                Etnia = f.Etnia.DsEtnia,
+                GeoLat = (Double)f.Latitude,
+                GeoLong = (Double)f.Longitude,
+                Id = f.Id,
+                Idade = f.Idade,
+                Imagem = f.ImgPerfilUrl,
+                Nome = f.Nome,
+                Olhos = f.Olhos,
+                Preco = f.Preco,
+                Descricao = f.Descricao
+            };
+
+            fornecedor.Fotos = new List<ImagemDTO>();
+
+            foreach (ImagemBE i in f.Fotos) 
+            {
+                fornecedor.Fotos.Add(new ImagemDTO()
+                {
+                    Id = i.Id,
+                    UrlImagem = i.UrlImagem
+                });
+            }
+
+            return fornecedor;
+        }
+
         public List<FornecedorDTO> GetFornecedores()
         {
             List<FornecedorDTO> ret = new List<FornecedorDTO>();
@@ -42,5 +78,6 @@ namespace Capitu.Service
 
             return ret;
         }
+
     }
 }
